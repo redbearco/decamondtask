@@ -62,9 +62,9 @@ export default function LoginPage() {
         <Button
           onClick={handleLogin}
           disabled={loading}
-          className="w-full text-xl cursor-pointer"
+          className="bg-white w-full text-xl cursor-pointer"
         >
-          {loading ? "در حال ورود..." : "ورود"}
+          {loading ? "در حال ورود ..." : "ورود"}
         </Button>
       </div>
     </div>
