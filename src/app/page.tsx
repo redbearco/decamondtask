@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useCallback } from "react"
+import { useState, useRef, useCallback, useEffect } from "react"
 import { useRouter } from "next/navigation"
 
 import { Input } from "@/components/ui/input"
@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 
 import { validatePhone } from "@/lib/validation"
 import { fetchUser } from "@/lib/api"
-import { saveUser, UserData } from "@/lib/storage"
+import { getUser, saveUser, UserData } from "@/lib/storage"
 
 export default function LoginPage() {
   const router = useRouter()
@@ -17,6 +17,13 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
 
   const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    const storedUser = getUser()
+    if (storedUser) {
+      router.replace("/dashboard")
+    }
+  }, [router])
 
   const handleLogin = useCallback(async () => {
     setError("")
