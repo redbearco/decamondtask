@@ -1,4 +1,4 @@
-import { UserData } from "./storage"
+import { UserData } from "@/types/user"
 
 export async function fetchUser(phone: string): Promise<UserData> {
   const res = await fetch("https://randomuser.me/api/?results=1&nat=us")

@@ -4,8 +4,10 @@ import { useEffect, useState, useCallback } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 
-import { getUser, clearUser, UserData } from "@/lib/storage"
+import { getUser, clearUser } from "@/lib/storage"
 import Image from "next/image"
+import { UserData } from "@/types/user"
+import { AuthLayout } from "@/components/layout/AuthLayout"
 
 export default function DashboardPage() {
     const router = useRouter()
@@ -34,28 +36,25 @@ export default function DashboardPage() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-blue-950 px-4">
+        <AuthLayout>
+            <h1 className="text-2xl font-bold">خوش آمدید {user?.name}</h1>
 
-            <div className="bg-gray-300 shadow-lg rounded-2xl p-6 w-full max-w-md mx-auto grid grid-cols-1 gap-4 justify-items-center text-center">
-                <h1 className="text-2xl font-bold">خوش آمدید {user?.name}</h1>
+            {user?.picture && (
+                <Image
+                    src={user.picture}
+                    alt={user?.name}
+                    width={96}
+                    height={96}
+                    className="rounded-full"
 
-                {user?.picture && (
-                    <Image
-                        src={user.picture}
-                        alt={user?.name}
-                        width={96}  
-                        height={96} 
-                        className="rounded-full"
-                     
-                    />
-                )}
+                />
+            )}
 
-                <p className="text-gray-600">{user?.email}</p>
+            <p className="text-gray-600">{user?.email}</p>
 
-                <Button onClick={handleLogout} className="bg-white w-full text-xl cursor-pointer">
-                    خروج
-                </Button>
-            </div>
-        </div>
+            <Button onClick={handleLogout} className="bg-white w-full text-xl cursor-pointer">
+                خروج
+            </Button>
+        </AuthLayout>
     )
 }

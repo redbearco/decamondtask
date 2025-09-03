@@ -5,10 +5,13 @@ import { useRouter } from "next/navigation"
 
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label"
 
 import { validatePhone } from "@/lib/validation"
 import { fetchUser } from "@/lib/api"
-import { getUser, saveUser, UserData } from "@/lib/storage"
+import { getUser, saveUser } from "@/lib/storage"
+import { UserData } from "@/types/user"
+import { AuthLayout } from "@/components/layout/AuthLayout"
 
 export default function LoginPage() {
   const router = useRouter()
@@ -47,33 +50,31 @@ export default function LoginPage() {
   }, [phone, router])
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-blue-950 px-4">
-      <div className="w-full max-w-md bg-gray-300 shadow-lg rounded-2xl p-6">
-        <h1 className="text-4xl font-bold mb-4 text-center">ورود</h1>
+    <AuthLayout>
+      <h1 className="text-4xl font-bold mb-4 text-center">ورود</h1>
 
-        <label htmlFor="phone" className="block text-2xl mb-1 text-right font-bold">
-          شماره موبایل
-        </label>
-        <Input
-          ref={inputRef}
-          id="phone"
-          type="tel"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          placeholder="مثال: 09337200943"
-          className="mb-2 text-xl"
-        />
+      <Label htmlFor="phone">
+        شماره موبایل
+      </Label>
+      <Input
+        ref={inputRef}
+        id="phone"
+        type="tel"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+        placeholder="مثال: 09337200943"
+        className="mb-2 text-xl"
+      />
 
-        {error && <p className="text-red-400 text-base mb-2">{error}</p>}
+      {error && <p className="text-red-400 text-base mb-2">{error}</p>}
 
-        <Button
-          onClick={handleLogin}
-          disabled={loading}
-          className="bg-white w-full text-xl cursor-pointer"
-        >
-          {loading ? "در حال ورود ..." : "ورود"}
-        </Button>
-      </div>
-    </div>
+      <Button
+        onClick={handleLogin}
+        disabled={loading}
+        className="bg-white w-full text-xl cursor-pointer"
+      >
+        {loading ? "در حال ورود ..." : "ورود"}
+      </Button>
+    </AuthLayout>
   )
 }
