@@ -51,8 +51,11 @@ export default function DashboardPage() {
             )}
 
             <p className="text-gray-600">{user?.email}</p>
-
-            <Button onClick={handleLogout} className="bg-white w-full text-xl cursor-pointer">
+            <Button
+                onClick={handleLogout}
+                type="submit"
+                className="text-xl cursor-pointer"
+            >
                 خروج
             </Button>
         </AuthLayout>

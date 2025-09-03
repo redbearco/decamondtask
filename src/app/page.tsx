@@ -52,28 +52,24 @@ export default function LoginPage() {
   return (
     <AuthLayout>
       <h1 className="text-4xl font-bold mb-4 text-center">ورود</h1>
-
-      <Label htmlFor="phone">
-        شماره موبایل
-      </Label>
       <Input
-        ref={inputRef}
         id="phone"
         type="tel"
+        label="شماره موبایل"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
-        placeholder="مثال: 09337200943"
-        className="mb-2 text-xl"
+        error={error}
+        placeholder="مثال: 09123456789"
       />
-
-      {error && <p className="text-red-400 text-base mb-2">{error}</p>}
 
       <Button
         onClick={handleLogin}
         disabled={loading}
-        className="bg-white w-full text-xl cursor-pointer"
+        isLoading={loading}
+        type="submit"
+        className="text-xl cursor-pointer"
       >
-        {loading ? "در حال ورود ..." : "ورود"}
+        ورود
       </Button>
     </AuthLayout>
   )
